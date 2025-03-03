@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+// Vérifie si l'utilisateur est connecté
+if (!isset($_SESSION['id'])) {
+    // Redirige vers la page de connexion avec un message d'erreur
+    header("Location: form_connexion.php?errorl=Veuillez vous connecter pour accéder à l'administration.");
+    exit();
+}
+
+// Vérifie si l'utilisateur a l'ID 1 (Admin)
+if ($_SESSION['id'] != 1) {
+    // Redirige vers une autre page s'il n'est pas admin
+    header("Location: livre.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 

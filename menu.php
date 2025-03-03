@@ -11,23 +11,36 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">accueil</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                     </li>
+
+                    <?php if (isset($_SESSION['id']) && $_SESSION['id'] == 1) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin.php">Admin</a>
+                        </li>
+                    <?php } ?>
                 </ul>
+
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search">
                 </form>
-                <div>
-                    <a href="form_inscrire.php"><button class="btn btn-outline-primary">S'inscrire</button></a>
-                    <a href="form_connexion.php"><button class="btn btn-outline-success" type="submit">Se connecter</button></a>
 
+                <div>
+                    <?php if (isset($_SESSION['email'])) { ?>
+                        <span class="me-3">Bienvenue, <strong><?= htmlspecialchars($_SESSION['email']) ?></strong></span>
+                        <a href="./utilisateur/deconnexion.php"><button class="btn btn-outline-danger">Déconnexion</button></a>
+                    <?php } else { ?>
+                        <a href="form_inscrire.php"><button class="btn btn-outline-primary">S'inscrire</button></a>
+                        <a href="form_connexion.php"><button class="btn btn-outline-success">Se connecter</button></a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
